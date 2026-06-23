@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Caso de Negocio · Etiquetas Electrónicas · Auto Mercado</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#00A84F;--green2:#007A38;--green3:#005C2A;--greenl:#E6F5EC;
+  --red:#E8391D;--t1:#1A2A1C;--t2:#2E4A30;--t3:#6B8A6E;--t4:#A8C4AB;
+  --line:#D8E8DA;--line2:#EBF3EC;--paper:#F7F8F5;--white:#FFF;
+  --amber:#C8890A;--amberl:#FEF3DC;--blue:#1D4ED8;--bluel:#DBEAFE;
+  --slate:#1A2E1F;--radius:12px;--radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--paper);color:var(--t1);-webkit-font-smoothing:antialiased}
+
+.header{background:var(--green3);padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;border-bottom:4px solid var(--red);position:sticky;top:0;z-index:10}
+.h-left{display:flex;align-items:center;gap:16px}
+.h-logo{height:40px}
+.h-div{width:1px;height:22px;background:rgba(255,255,255,.15)}
+.h-title{font-size:12px;font-weight:600;color:rgba(255,255,255,.55);letter-spacing:.05em;text-transform:uppercase}
+.h-back{background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.12);padding:6px 14px;border-radius:20px;font-family:'Nunito',sans-serif;font-size:11px;font-weight:600;text-decoration:none;transition:all .15s}
+.h-back:hover{background:rgba(255,255,255,.16);color:white}
+
+.main{max-width:1100px;margin:0 auto;padding:44px 48px 80px}
+
+/* HERO */
+.hero{background:var(--slate);border-radius:var(--radius);padding:36px 44px;margin-bottom:32px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;border-radius:50%;background:rgba(0,168,79,.04);pointer-events:none}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,168,79,.6);margin-bottom:10px}
+.hero-title{font-size:clamp(26px,4vw,44px);font-weight:800;color:white;line-height:1.1;margin-bottom:8px}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:18px;line-height:1.6}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap}
+.htag{font-size:10px;font-family:'DM Mono',monospace;background:rgba(255,255,255,.07);color:rgba(255,255,255,.6);padding:3px 10px;border-radius:3px;border:1px solid rgba(255,255,255,.1)}
+
+.section-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:14px}
+
+/* PROBLEMA */
+.problem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
+.prob-card{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:18px 16px;position:relative;overflow:hidden}
+.prob-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--red)}
+.prob-n{font-size:clamp(28px,3vw,40px);font-weight:800;color:var(--red);line-height:1;margin-bottom:4px}
+.prob-l{font-size:11px;color:var(--t1);font-weight:600;margin-bottom:2px}
+.prob-s{font-size:10px;color:var(--t3)}
+
+.problem-bullets{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;margin-bottom:32px}
+.prob-list{display:flex;flex-direction:column;gap:10px}
+.prob-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--t2);line-height:1.6}
+.prob-dot{width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:7px}
+
+/* SOLUCIÓN */
+.solucion{background:var(--green3);border-radius:var(--radius);padding:28px 32px;margin-bottom:24px}
+.sol-title{font-size:14px;font-weight:700;color:rgba(0,168,79,.7);margin-bottom:10px;font-family:'DM Mono',monospace;letter-spacing:.1em;text-transform:uppercase}
+.sol-text{font-size:15px;color:rgba(255,255,255,.85);line-height:1.8}
+
+/* BENEFICIOS */
+.beneficios-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px}
+.ben-card{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.ben-icon{font-size:24px;margin-bottom:8px;display:block}
+.ben-title{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:4px}
+.ben-text{font-size:13px;color:var(--t3);line-height:1.6}
+
+/* FINANCIERO */
+.financiero{margin-bottom:32px}
+.fin-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.fin-card{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;position:relative;overflow:hidden}
+.fin-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px}
+.fin-card.ingresos::after{background:var(--green)}
+.fin-card.merma::after{background:var(--blue)}
+.fin-card.plazo::after{background:var(--amber)}
+.fin-n{font-size:clamp(22px,2.5vw,32px);font-weight:800;line-height:1;margin-bottom:4px}
+.fin-n.green{color:var(--green)}
+.fin-n.blue{color:var(--blue)}
+.fin-n.amber{color:var(--amber)}
+.fin-l{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:2px}
+.fin-s{font-size:11px;color:var(--t3)}
+
+/* PROVEEDORES */
+.prov-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+.prov-card{background:white;border:2px solid var(--line);border-radius:var(--radius);padding:22px 24px;transition:all .2s}
+.prov-card.destacado{border-color:var(--green);background:var(--greenl)}
+.prov-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;display:inline-block;padding:3px 10px;border-radius:3px}
+.prov-badge.rec{background:var(--green);color:white}
+.prov-badge.alt{background:var(--line2);color:var(--t3)}
+.prov-name{font-size:18px;font-weight:800;color:var(--t1);margin-bottom:4px}
+.prov-sub{font-size:12px;color:var(--t3);margin-bottom:14px}
+.prov-precio{font-size:36px;font-weight:800;color:var(--green);line-height:1;margin-bottom:4px}
+.prov-precio-l{font-size:12px;color:var(--t3);margin-bottom:12px}
+.prov-note{font-size:12px;color:var(--t2);background:var(--line2);padding:8px 12px;border-radius:var(--radius-sm)}
+
+/* ESTRATEGIA COMERCIAL */
+.estr-list{display:flex;flex-direction:column;gap:8px;margin-bottom:32px}
+.estr-item{display:flex;align-items:flex-start;gap:12px;background:white;border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 18px}
+.estr-icon{font-size:20px;flex-shrink:0}
+.estr-text{font-size:14px;color:var(--t2);line-height:1.6}
+
+/* ÁREAS Y RIESGOS */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+.box{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px}
+.box-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:14px}
+.box-list{display:flex;flex-direction:column;gap:8px}
+.box-item{font-size:13px;color:var(--t2);line-height:1.5;display:flex;align-items:flex-start;gap:8px}
+.box-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.dot-green{background:var(--green)}
+.dot-amber{background:var(--amber)}
+.dot-red{background:var(--red)}
+
+/* FCE */
+.fce{background:var(--slate);border-radius:var(--radius);padding:24px 28px;margin-bottom:32px}
+.fce-title{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,168,79,.6);margin-bottom:14px}
+.fce-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fce-item{display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,.04);border-radius:var(--radius-sm);padding:12px 14px}
+.fce-icon{font-size:18px;flex-shrink:0}
+.fce-text{font-size:13px;color:rgba(255,255,255,.75);line-height:1.5}
+
+/* DECISIÓN */
+.decision{background:var(--green3);border-radius:var(--radius);padding:28px 32px}
+.dec-title{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,168,79,.7);margin-bottom:16px}
+.dec-pregunta{font-size:20px;font-weight:800;color:white;margin-bottom:14px}
+.dec-opciones{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dec-op{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius-sm);padding:16px 18px}
+.dec-op-title{font-size:14px;font-weight:700;color:white;margin-bottom:4px}
+.dec-op-sub{font-size:12px;color:rgba(255,255,255,.55);line-height:1.5}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="h-left">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Auto_Mercado_logo.svg/200px-Auto_Mercado_logo.svg.png" class="h-logo" alt="Auto Mercado" onerror="this.style.display='none'">
+    <div class="h-div"></div>
+    <div class="h-title">Caso de Negocio · CTD #57</div>
+  </div>
+  <a href="index.html" class="h-back">← Agenda</a>
+</header>
+
+<div class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Caso de Negocio · CTD #57 · 23 junio 2026</div>
+    <div class="hero-title">Etiquetas Electrónicas<br>en Punto de Venta</div>
+    <div class="hero-sub">Viabilidad técnica, operativa y financiera de implementar Electronic Shelf Labels (ESL) en los PDX de Auto Mercado</div>
+    <div class="hero-tags">
+      <span class="htag">Tatiana Angulo</span>
+      <span class="htag">José D. Esquivel</span>
+      <span class="htag">Operaciones PDX</span>
+      <span class="htag">25 min</span>
+    </div>
+  </div>
+
+  <!-- SITUACIÓN ACTUAL -->
+  <div class="section-label">📊 Situación actual — El problema</div>
+  <div class="problem-grid">
+    <div class="prob-card">
+      <div class="prob-n">16,000</div>
+      <div class="prob-l">Cambios de precio / mes</div>
+      <div class="prob-s">Por PDX — proceso 100% manual</div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-n">225 hrs</div>
+      <div class="prob-l">Horas invertidas / mes</div>
+      <div class="prob-s">34h impresión · 120h cambio · 71h revisión</div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-n">600</div>
+      <div class="prob-l">Capacidad máxima / día</div>
+      <div class="prob-s">Tope operativo del proceso manual</div>
+    </div>
+    <div class="prob-card">
+      <div class="prob-n">2,300</div>
+      <div class="prob-l">Cambios en días atípicos</div>
+      <div class="prob-s">3.8× por encima de la capacidad</div>
+    </div>
+  </div>
+
+  <div class="problem-bullets">
+    <div class="prob-list">
+      <div class="prob-item"><div class="prob-dot"></div>Errores por etiquetas mal colocadas, desactualizadas o sin precio</div>
+      <div class="prob-item"><div class="prob-dot"></div>Retrasos en la implementación de promociones y cambios de precio en PDX</div>
+      <div class="prob-item"><div class="prob-dot"></div>Afectación al servicio al cliente por incongruencias entre precio en góndola y sistema</div>
+      <div class="prob-item"><div class="prob-dot"></div>8 tipos de habladores distintos gestionados manualmente: promoción, Auto Volumen, coleccionables, doble puntaje, campaña rosa, factor nutricional, Amex, BOGO</div>
+    </div>
+  </div>
+
+  <!-- SOLUCIÓN -->
+  <div class="section-label">💡 La solución — ESL (Electronic Shelf Labels)</div>
+  <div class="solucion">
+    <div class="sol-title">¿Qué son las etiquetas electrónicas?</div>
+    <div class="sol-text">Las etiquetas electrónicas sincronizan automáticamente los precios entre el sistema central y los estantes de los PDX. Cuando se realiza un cambio de precio en el ERP, la actualización se transmite de forma inalámbrica a todas las etiquetas en segundos, eliminando el proceso manual de impresión, colocación y revisión.</div>
+  </div>
+
+  <!-- BENEFICIOS -->
+  <div class="section-label" style="margin-top:24px">✅ Justificación y beneficios</div>
+  <div class="beneficios-grid">
+    <div class="ben-card">
+      <span class="ben-icon">⚡</span>
+      <div class="ben-title">Eficiencia operativa</div>
+      <div class="ben-text">Actualización de precios casi inmediata. Ahorro significativo de horas hombre e insumos de impresión.</div>
+    </div>
+    <div class="ben-card">
+      <span class="ben-icon">⭐</span>
+      <div class="ben-title">Experiencia del cliente</div>
+      <div class="ben-text">Información precisa en todo momento. Elimina incongruencias de precios. Acceso a ofertas y datos nutricionales vía QR.</div>
+    </div>
+    <div class="ben-card">
+      <span class="ben-icon">🛡️</span>
+      <div class="ben-title">Reducción de errores</div>
+      <div class="ben-text">Menor riesgo de inconsistencias entre precio en góndola y precio en sistema. Datos de origen y nutricionales actualizados.</div>
+    </div>
+    <div class="ben-card">
+      <span class="ben-icon">🌱</span>
+      <div class="ben-title">Sostenibilidad</div>
+      <div class="ben-text">Menor consumo de papel y materiales de impresión. Imagen moderna y tecnológica coherente con el posicionamiento premium.</div>
+    </div>
+  </div>
+
+  <!-- ESTRATEGIA COMERCIAL -->
+  <div class="section-label">📈 Habilitación estratégica comercial</div>
+  <div class="estr-list">
+    <div class="estr-item">
+      <div class="estr-icon">⚡</div>
+      <div class="estr-text"><strong>Precios en tiempo real:</strong> Descuentos por expiración, promociones basadas en demanda, flash sales que cambian en minutos.</div>
+    </div>
+    <div class="estr-item">
+      <div class="estr-icon">📊</div>
+      <div class="estr-text"><strong>Monitoreo de impacto:</strong> Seguimiento en tiempo real del efecto de los cambios de precio sobre ventas y comportamiento del cliente.</div>
+    </div>
+    <div class="estr-item">
+      <div class="estr-icon">🏷️</div>
+      <div class="estr-text"><strong>Fidelización integrada:</strong> Códigos QR permiten acceder a ofertas exclusivas Auto Frecuente, información de productos o recompensas con un escaneo.</div>
+    </div>
+    <div class="estr-item">
+      <div class="estr-icon">🎯</div>
+      <div class="estr-text"><strong>Reacción a competencia:</strong> Capacidad de adaptar precios según demanda local y movimientos de mercado de forma inmediata.</div>
+    </div>
+  </div>
+
+  <!-- FINANCIERO -->
+  <div class="section-label">💰 Implicaciones financieras</div>
+  <div class="financiero">
+    <div class="fin-kpis">
+      <div class="fin-card ingresos">
+        <div class="fin-n green">₡100M</div>
+        <div class="fin-l">Ingresos por monetización digital del anaquel</div>
+        <div class="fin-s">Total anual estimado</div>
+      </div>
+      <div class="fin-card merma">
+        <div class="fin-n blue">₡200M</div>
+        <div class="fin-l">Reducción de merma</div>
+        <div class="fin-s">Total anual estimado</div>
+      </div>
+      <div class="fin-card plazo">
+        <div class="fin-n amber">90 días</div>
+        <div class="fin-l">Tiempo de implementación estimado</div>
+        <div class="fin-s">Por PDX · Escalable a toda la cadena</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROVEEDORES -->
+  <div class="section-label">🏢 Proveedores en análisis</div>
+  <div class="prov-grid">
+    <div class="prov-card">
+      <span class="prov-badge alt">Opción A</span>
+      <div class="prov-name">Reintec (Wintec)</div>
+      <div class="prov-sub">Proveedor establecido en la región</div>
+      <div class="prov-precio">$7.1</div>
+      <div class="prov-precio-l">por etiqueta (aprox.)</div>
+      <div class="prov-note">Mayor costo por unidad. Evaluar soporte local y garantías.</div>
+    </div>
+    <div class="prov-card destacado">
+      <span class="prov-badge rec">Opción B</span>
+      <div class="prov-name">Datare Soluciones (Minew)</div>
+      <div class="prov-sub">Solución de menor costo por unidad</div>
+      <div class="prov-precio">$3.0</div>
+      <div class="prov-precio-l">por etiqueta (aprox.)</div>
+      <div class="prov-note">+ $20,000 por costos de integración de la solución. Evaluar soporte técnico y estabilidad.</div>
+    </div>
+  </div>
+
+  <!-- ÁREAS INVOLUCRADAS Y RIESGOS -->
+  <div class="two-col">
+    <div class="box">
+      <div class="box-title">🏢 Áreas involucradas</div>
+      <div class="box-list">
+        <div class="box-item"><div class="box-dot dot-green"></div>Operaciones PDX — implementación y gestión del cambio</div>
+        <div class="box-item"><div class="box-dot dot-green"></div>Comercial (Perecederos y Secos) — planeación y ejecución comercial</div>
+        <div class="box-item"><div class="box-dot dot-green"></div>TI — integración con ERP y soporte técnico</div>
+        <div class="box-item"><div class="box-dot dot-green"></div>UGD — integración de datos necesarios para el funcionamiento</div>
+        <div class="box-item"><div class="box-dot dot-green"></div>Logística y Abastecimiento — implementación y manejo de insumos</div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-title">⚠️ Riesgos identificados</div>
+      <div class="box-list">
+        <div class="box-item"><div class="box-dot dot-amber"></div>Resistencia al cambio del personal operativo y de supervisión</div>
+        <div class="box-item"><div class="box-dot dot-amber"></div>Posibles problemas técnicos durante implementación o funcionamiento diario</div>
+        <div class="box-item"><div class="box-dot dot-amber"></div>No todas las ubicaciones de PDX pueden ser compatibles</div>
+        <div class="box-item"><div class="box-dot dot-red"></div>Elección del proveedor podría tener complicaciones de soporte</div>
+        <div class="box-item"><div class="box-dot dot-red"></div>El costo podría superar beneficios si la implementación no es completa y efectiva</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FACTORES CRÍTICOS -->
+  <div class="fce">
+    <div class="fce-title">🎯 Factores críticos de éxito</div>
+    <div class="fce-grid">
+      <div class="fce-item"><div class="fce-icon">📚</div><div class="fce-text">Capacitación idónea para todo el personal involucrado</div></div>
+      <div class="fce-item"><div class="fce-icon">🤝</div><div class="fce-text">Liderazgo y apoyo de gerencias y líderes para impulsar el cambio</div></div>
+      <div class="fce-item"><div class="fce-icon">📊</div><div class="fce-text">Medición constante del ROI para validar la inversión y realizar ajustes</div></div>
+      <div class="fce-item"><div class="fce-icon">💡</div><div class="fce-text">Capacidad de generar formas de trabajo distintas que aprovechen al máximo la tecnología</div></div>
+    </div>
+  </div>
+
+  <!-- DECISIÓN -->
+  <div class="decision">
+    <div class="dec-title">🤝 Solicitud al Comité CTD #57</div>
+    <div class="dec-pregunta">¿Cuál es la ruta de decisión para la aprobación del proyecto?</div>
+    <div class="dec-opciones">
+      <div class="dec-op">
+        <div class="dec-op-title">Aprobar con condiciones</div>
+        <div class="dec-op-sub">Definir PDX piloto, proveedor seleccionado, presupuesto aprobado y métricas de éxito antes de escalar</div>
+      </div>
+      <div class="dec-op">
+        <div class="dec-op-title">Solicitar información adicional</div>
+        <div class="dec-op-sub">Definir qué datos o análisis complementarios se necesitan y quién los prepara para la Sesión #58</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

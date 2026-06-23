@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Comité de Transformación Digital · Sesión #57 · Auto Mercado</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#00A84F;--green2:#007A38;--green3:#005C2A;--greenl:#E6F5EC;
+  --red:#E8391D;--t1:#1A2A1C;--t2:#2E4A30;--t3:#6B8A6E;--t4:#A8C4AB;
+  --line:#D8E8DA;--line2:#EBF3EC;--paper:#F7F8F5;--white:#FFF;
+  --amber:#C8890A;--amberl:#FEF3DC;--blue:#1D4ED8;--bluel:#DBEAFE;
+  --radius:12px;--radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--paper);color:var(--t1);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* HEADER */
+.header{background:var(--green3);padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between;border-bottom:4px solid var(--red);position:sticky;top:0;z-index:10}
+.h-brand{display:flex;align-items:center;gap:18px}
+.h-logo{height:42px}
+.h-div{width:1px;height:24px;background:rgba(255,255,255,.15)}
+.h-title{font-size:13px;font-weight:600;color:rgba(255,255,255,.55);letter-spacing:.05em;text-transform:uppercase}
+.h-date{font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.4)}
+
+/* MAIN */
+.main{max-width:1100px;margin:0 auto;padding:52px 48px 80px}
+
+/* HERO */
+.hero{background:var(--green3);border-radius:var(--radius);padding:40px 48px;margin-bottom:36px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;right:-120px;width:400px;height:400px;border-radius:50%;background:rgba(0,168,79,.05);pointer-events:none}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,168,79,.7);margin-bottom:12px}
+.hero-title{font-size:clamp(28px,4vw,48px);font-weight:800;color:white;line-height:1.1;margin-bottom:10px}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:20px}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap}
+.hero-tag{font-family:'DM Mono',monospace;font-size:10px;background:rgba(0,168,79,.15);color:rgba(0,168,79,.9);padding:4px 12px;border-radius:4px;border:1px solid rgba(0,168,79,.25)}
+
+/* AGENDA */
+.section-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:16px}
+.agenda{display:flex;flex-direction:column;gap:10px;margin-bottom:40px}
+.agenda-item{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;display:grid;grid-template-columns:60px 1fr auto;gap:16px;align-items:center;transition:all .2s}
+.agenda-item:hover{border-color:var(--green);box-shadow:0 4px 16px rgba(0,168,79,.1)}
+.agenda-item.current{border-color:var(--green);border-left:4px solid var(--green);background:var(--greenl)}
+.agenda-item.link{cursor:pointer;text-decoration:none;display:grid}
+.ai-num{font-family:'DM Mono',monospace;font-size:22px;font-weight:700;color:var(--t4);line-height:1}
+.ai-num.current{color:var(--green)}
+.ai-body{}
+.ai-title{font-size:17px;font-weight:700;color:var(--t1);margin-bottom:3px}
+.ai-title.current{color:var(--green2)}
+.ai-sub{font-size:13px;color:var(--t3);line-height:1.5}
+.ai-time{font-family:'DM Mono',monospace;font-size:12px;color:var(--t4);white-space:nowrap;text-align:right}
+.ai-time .mins{font-size:20px;font-weight:700;color:var(--t3);display:block;line-height:1}
+.ai-time .mins.current{color:var(--green)}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:4px 10px;border-radius:20px;font-weight:600;margin-top:6px}
+.badge-presenter{background:var(--line2);color:var(--t2)}
+.badge-link{background:var(--green3);color:white;cursor:pointer;text-decoration:none;transition:all .15s}
+.badge-link:hover{background:var(--green2)}
+.badge-new{background:var(--amberl);color:var(--amber)}
+
+/* ACTION CARDS */
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px}
+.action-card{border-radius:var(--radius);padding:28px 32px;text-decoration:none;display:block;transition:all .2s;position:relative;overflow:hidden}
+.action-card:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.12)}
+.action-card.valor{background:var(--green3);color:white}
+.action-card.etiquetas{background:var(--t1);color:white}
+.ac-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin-bottom:10px}
+.ac-title{font-size:22px;font-weight:800;line-height:1.2;margin-bottom:8px}
+.ac-sub{font-size:13px;opacity:.65;line-height:1.6;margin-bottom:16px}
+.ac-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:white;padding:8px 16px;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:12px;font-weight:700}
+
+/* ACUERDOS */
+.acuerdos{display:flex;flex-direction:column;gap:8px;margin-bottom:40px}
+.acuerdo{background:white;border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 18px;display:flex;align-items:center;gap:14px}
+.ac-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.ac-ok{background:var(--greenl)}
+.ac-pending{background:var(--amberl)}
+.ac-wait{background:var(--line2)}
+.ac-text{flex:1}
+.ac-t{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:1px}
+.ac-s{font-size:11px;color:var(--t3)}
+.ac-status{font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;white-space:nowrap}
+.s-ok{background:var(--greenl);color:var(--green2)}
+.s-pending{background:var(--amberl);color:var(--amber)}
+.s-wait{background:var(--line2);color:var(--t3)}
+
+/* COMPROMISOS */
+.compromisos{background:var(--green3);border-radius:var(--radius);padding:24px 28px}
+.comp-title{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,168,79,.7);margin-bottom:16px}
+.comp-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+.comp-num{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.12);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.comp-body{}
+.comp-t{font-size:14px;font-weight:700;color:white;margin-bottom:2px}
+.comp-s{font-size:12px;color:rgba(255,255,255,.55)}
+.comp-div{height:1px;background:rgba(255,255,255,.08);margin:10px 0}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="h-brand">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Auto_Mercado_logo.svg/200px-Auto_Mercado_logo.svg.png" class="h-logo" alt="Auto Mercado" onerror="this.style.display='none'">
+    <div class="h-div"></div>
+    <div class="h-title">Comité de Transformación Digital</div>
+  </div>
+  <div class="h-date">23 junio 2026 · 2:30 PM</div>
+</header>
+
+<div class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Comité de Transformación Digital · Auto Mercado</div>
+    <div class="hero-title">Sesión #57</div>
+    <div class="hero-sub">Martes 23 de junio de 2026 · 2:30 PM · ~60 minutos</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Rodolfo Arguedas · CEO</span>
+      <span class="hero-tag">Programa TD 2025–2028</span>
+      <span class="hero-tag">Moderador: Manuel Farrell</span>
+    </div>
+  </div>
+
+  <!-- AGENDA -->
+  <div class="section-label">Agenda de la sesión</div>
+  <div class="agenda">
+
+    <div class="agenda-item">
+      <div class="ai-num">01</div>
+      <div class="ai-body">
+        <div class="ai-title">Seguimiento acuerdos — Sesión #56</div>
+        <div class="ai-sub">GS1 · Horizonte 3 · Horizonte 2 / Sisnet</div>
+      </div>
+      <div class="ai-time"><span class="mins">5</span>min</div>
+    </div>
+
+    <a href="guia-valor.html" class="agenda-item current link" style="text-decoration:none">
+      <div class="ai-num current">02</div>
+      <div class="ai-body">
+        <div class="ai-title current">Exposición de Valor — Proyectos completados</div>
+        <div class="ai-sub">Presentación por área · VPs y Miembros Directivos</div>
+        <span class="badge badge-link">📊 Abrir Resumen Ejecutivo →</span>
+      </div>
+      <div class="ai-time"><span class="mins current">30</span>min</div>
+    </a>
+
+    <a href="etiquetas.html" class="agenda-item link" style="text-decoration:none">
+      <div class="ai-num">03</div>
+      <div class="ai-body">
+        <div class="ai-title">Caso de negocio — Etiquetas Electrónicas en PDX</div>
+        <div class="ai-sub">Presentadores: Tatiana Angulo · José D. Esquivel (Operaciones PDX)</div>
+        <span class="badge badge-new">Nuevo proyecto</span>
+        <span class="badge badge-link" style="margin-left:6px">🏷️ Abrir caso de negocio →</span>
+      </div>
+      <div class="ai-time"><span class="mins">25</span>min</div>
+    </a>
+
+    <div class="agenda-item">
+      <div class="ai-num">04</div>
+      <div class="ai-body">
+        <div class="ai-title">Cierre · Compromisos para Sesión #58</div>
+        <div class="ai-sub">Presentador: Manuel Farrell</div>
+      </div>
+      <div class="ai-time"><span class="mins">5</span>min</div>
+    </div>
+
+  </div>
+
+  <!-- ACCESOS DIRECTOS -->
+  <div class="section-label">Accesos directos</div>
+  <div class="action-grid">
+    <a href="guia-valor.html" class="action-card valor">
+      <div class="ac-eyebrow">Punto 02 · 30 min</div>
+      <div class="ac-title">Resumen Ejecutivo del Portafolio TD</div>
+      <div class="ac-sub">Valor capturado por los proyectos completados del Programa TD 2024–2025. Perspectivas del equipo directivo.</div>
+      <div class="ac-btn">📊 Abrir resumen →</div>
+    </a>
+    <a href="etiquetas.html" class="action-card etiquetas">
+      <div class="ac-eyebrow">Punto 03 · 25 min</div>
+      <div class="ac-title">Caso de Negocio · Etiquetas Electrónicas</div>
+      <div class="ac-sub">Viabilidad técnica, operativa y financiera de implementar ESL en los PDX de Auto Mercado.</div>
+      <div class="ac-btn">🏷️ Abrir caso →</div>
+    </a>
+  </div>
+
+  <!-- ACUERDOS #56 -->
+  <div class="section-label">Seguimiento acuerdos — CTD #56</div>
+  <div class="acuerdos">
+    <div class="acuerdo">
+      <div class="ac-icon ac-pending">🤝</div>
+      <div class="ac-text">
+        <div class="ac-t">GS1 — Acercamiento con otras cadenas para alineamiento de proveedores</div>
+        <div class="ac-s">Alejandra Masís · Alberto Alonso</div>
+      </div>
+      <span class="ac-status s-pending">🟡 Por declarar hoy</span>
+    </div>
+    <div class="acuerdo">
+      <div class="ac-icon ac-ok">✅</div>
+      <div class="ac-text">
+        <div class="ac-t">Horizonte 3 — Talleres de visualización de alcance completados</div>
+        <div class="ac-s">Consolidación VPs + CEO: 24 jun · Borrador alcance: semana del 29 jun</div>
+      </div>
+      <span class="ac-status s-ok">✅ En curso</span>
+    </div>
+    <div class="acuerdo">
+      <div class="ac-icon ac-wait">⏳</div>
+      <div class="ac-text">
+        <div class="ac-t">Horizonte 2 — Plan de trabajo Sisnet + sesión presencial de corte</div>
+        <div class="ac-s">Sesión presencial semana del 5 jul · Corte al ~50% de ejecución</div>
+      </div>
+      <span class="ac-status s-wait">⏳ Sem. 5 jul</span>
+    </div>
+  </div>
+
+  <!-- COMPROMISOS #57 -->
+  <div class="compromisos">
+    <div class="comp-title">🤝 Compromisos al cierre — CTD #57 → Sesión #58</div>
+    <div class="comp-item">
+      <div class="comp-num">1</div>
+      <div class="comp-body">
+        <div class="comp-t">Conformidad del método de captura de valor</div>
+        <div class="comp-s">El Comité declara conformidad con la visualización presentada, o define ajustes al método para ciclos futuros</div>
+      </div>
+    </div>
+    <div class="comp-div"></div>
+    <div class="comp-item">
+      <div class="comp-num">2</div>
+      <div class="comp-body">
+        <div class="comp-t">Ruta de decisión — Etiquetas Electrónicas</div>
+        <div class="comp-s">Definir proceso, criterios y responsables para la aprobación o rechazo del proyecto ESL · Manuel Farrell</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
